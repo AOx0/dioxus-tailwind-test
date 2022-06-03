@@ -197,7 +197,10 @@ fn Hero(cx: Scope) -> Element {
                         day-to-day tasks while keeping the larger \
                         team goals in view"
                     }
-                    Button { title: "Get Started!" }
+                    div {
+                        class: "flex justify-center md:justify-start",
+                        Button { title: "Get Started!" }
+                    }
                 }
 
                 // Right item
