@@ -102,7 +102,7 @@ fn SunIcon(cx: Scope) -> Element {
 fn Button<'a>(cx: Scope, title: &'a str) -> Element {
     cx.render(rsx! {
         a {
-            class: "hidden md:block p-3 px-6 pt-2 text-white font-bold bg-orange-500 rounded-full baseline text-center baseline hover:bg-orange-600",
+            class: "p-3 px-6 pt-2 text-white font-bold bg-orange-500 rounded-full baseline text-center baseline hover:bg-orange-600",
             "{title}"
         }
     })
@@ -177,13 +177,34 @@ fn Main(cx: Scope) -> Element {
 
 #[inline_props]
 fn Hero(cx: Scope) -> Element {
+    let items_style = "space-y-12 flex flex-col mb-32 md:w-1/2";
     cx.render(rsx! {
         section {
             id: "hero",
+            class: "text-black dark:text-gray-100",
             div {
-                class: "container flex flex-col-reverse md:flex-row items-center px-6 mx-auto mt-10 space-y-0"
-            }
+                class: "container flex flex-col-reverse md:flex-row \
+                items-center px-6 mx-auto mt-10 space-y-0",
+                // Left item
+                div {
+                    class: "{items_style}",
+                    h1 { class: "max-w-md text-4xl font-bold text-center md:text-left md:text-5xl",
+                        "Bring everyone together to build better products"
+                    }
+                    p {
+                        class: "max-w-md text-center md:text-left",
+                        "Manage makes it simple for software teams to plan \
+                        day-to-day tasks while keeping the larger \
+                        team goals in view"
+                    }
+                    Button { title: "Get Started!" }
+                }
 
+                // Right item
+                div {
+                    class: "{items_style}"
+                }
+            }
         }
     })
 }
