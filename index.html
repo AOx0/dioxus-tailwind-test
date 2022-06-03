@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>TailCurso2</title>
+    <link data-trunk rel="copy-dir" href="img/"/>
+    <link data-trunk href="./tailwind.css" rel="css" />
+    <meta name="theme-color" id="tcolor" content="">
+    <script>
+        const html = document.getElementsByTagName('html')[0];
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.getElementById("tcolor").content = "rgb(31 41 55 / var(--tw-bg-opacity))"
+            html.classList.add('dark');
+            localStorage.theme = 'dark'
+        } else {
+            document.getElementById("tcolor").content = "black"
+            html.classList.remove('dark');
+            localStorage.theme = 'light'
+        }
+    </script>
+</head>
+<body id="main" class="bg-white dark:bg-gray-800">
+</body>
+</html>
