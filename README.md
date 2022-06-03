@@ -1,4 +1,4 @@
-# TailCurso
+# dioxus-tailwind-test 
 
 This is a follow up of implementation of the great video [Tailwind Crash Course | Project From Scratch](https://youtu.be/dFgzHOX84xQ) [(https://youtu.be/dFgzHOX84xQ)](https://youtu.be/dFgzHOX84xQ) using [Dioxus](https://github.com/DioxusLabs/dioxus) and [Trunk](https://github.com/thedodd/trunk)
 
