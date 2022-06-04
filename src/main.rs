@@ -124,6 +124,17 @@ fn Navbar(cx: Scope) -> Element {
         }
     "###;
 
+    let script2 = r###"
+        const btn = document.getElementById('menu-btn');
+        if (btn.innerHTML==='Close') {
+            btn.innerHTML = 'Menu';
+        } else {
+            btn.innerHTML = 'Close';
+        }
+        document.getElementById('menu').classList.toggle('hidden');
+        document.getElementById('menu').classList.toggle('flex');
+    "###;
+
     cx.render(rsx! {
         nav {
             class: "relative container v-screen mx-auto py-6 px-10  text-black dark:text-gray-100",
@@ -162,6 +173,33 @@ fn Navbar(cx: Scope) -> Element {
                             }
                         }
                     }
+                }
+
+                button {
+                    id: "menu-btn",
+                    class: "block md:hidden focus:outline-none",
+                    onclick: move |_| {
+                        js_sys::Function::new_no_args(script2)
+                        .call0(&JsValue::NULL)
+                        .expect("failed to eval script");
+                    },
+                    "Menu"
+                }
+            }
+
+            // Mobile menu
+            div {
+                class: "md:hidden",
+                menu {
+                    id: "menu",
+                    class:"bg-white md:bg-gray-800 hidden absolute flex-col items-center self-end py-8 mt-10 \
+                    space-y-6 font-bold gb-white sm:w-auto sm:self-center left-6 right-6 \
+                    drop-shadow-md",
+                    MenuItem { href: "/price", "Pricing" }
+                    MenuItem { href: "#", "Product"   }
+                    MenuItem { href: "#", "About Us"  }
+                    MenuItem { href: "#", "Careers"   }
+                    MenuItem { href: "#", "Community" }
                 }
             }
         }
@@ -217,7 +255,7 @@ fn Hero(cx: Scope) -> Element {
                     }
                     div {
                         class: "flex justify-center md:justify-start",
-                        Button { title: "Get Started!" }
+                        Button { title: "Get Started" }
                     }
                 }
 
@@ -407,6 +445,149 @@ fn Testimonios(cx: Scope) -> Element {
                         everyone motivated.\""
                     }
                 }
+
+                div {
+                    class: "my-16",
+                    Button { title: "Get Started" }
+                }
+            }
+        }
+    })
+}
+
+#[inline_props]
+fn CallToAction(cx: Scope) -> Element {
+    cx.render(rsx! {
+        section {
+            id: "action",
+            class: "text-black dark:text-gray-100 bg-orange-500",
+            div {
+                class: "container flex flex-col justify-between items-center px-6 py-24 \
+                mx-auto space-y-12 md:py-12 md:flex-row md:space-y-0",
+                h2 {
+                    class: "text-5xl font-bold leading-tight text-center text-white \
+                    md:text-4xl md:max-w-xl md:text-left",
+                    "Simplify how your team works today"
+                }
+                a {
+                    class: "p-3 px-6 pt-2 font-bold text-orange-500 bg-white rounded-full shadow-2xl baseline hover:bg-gray-100",
+                    "Get Started"
+                }
+            }
+        }
+    })
+}
+
+#[inline_props]
+fn LinkedIn(cx: Scope) -> Element {
+    cx.render(rsx! {
+        svg {
+            view_box: "0 0 24 24",
+            fill: "currentColor",
+            width: "24",
+            height: "24",
+            path {
+                d: "M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z",
+            }
+        }
+    })
+}
+
+#[inline_props]
+fn Github(cx: Scope) -> Element {
+    cx.render(rsx! {
+        svg {
+            fill: "currentColor",
+            view_box: "0 0 16 16",
+            width: "24",
+            height: "24",
+            path {
+                d: "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z",
+                fill_rule: "evenodd",
+            }
+        }
+    })
+}
+
+#[inline_props]
+fn Footer(cx: Scope) -> Element {
+    cx.render(rsx! {
+        footer {
+            id: "footer",
+            class: "text-gray-100 bg-gray-900",
+            div {
+                class: "container flex flex-col-reverse justify-between \
+                px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0",
+
+                div {
+                    class:"md:hidden text-white block text-center pt-10",
+                    "Copyright © 2022, All rights reserved"
+                }
+
+                // Logo and social
+                div {
+                    class: "flex flex-col-reverse items-center justify-between space-y-12 md:flex-col \
+                    md:space-y-0 md:items-start",
+                    div {
+                        img {
+                            src: "../img/logo-white.svg"
+                        }
+                    }
+                    div {
+                        class: "flex justify-center space-x-4 pb-10 md:pt-6",
+                        MenuItem {
+                            href: "#",
+                            Github { }
+                        }
+                        MenuItem {
+                            href: "#",
+                            LinkedIn { }
+                        }
+                    }
+                }
+
+                // List container
+                div {
+                    class: "flex justify-around space-x-32",
+                    div {
+                        class: "flex flex-col space-y-3",
+                        MenuItem { href: "#", "Home" }
+                        MenuItem { href: "#", "Pricing" }
+                        MenuItem { href: "#", "Products" }
+                        MenuItem { href: "#", "About" }
+                    }
+                    div {
+                        class: "flex flex-col space-y-3",
+                        MenuItem { href: "#", "Careers" }
+                        MenuItem { href: "#", "Community" }
+                        MenuItem { href: "#", "Privacy Policy" }
+                    }
+                }
+
+                div {
+                    class: "flex flex-col justify-between",
+                    form {
+                        div {
+                            class: "flex space-x-3",
+                            input {
+                                class: "flex-1 px-4 rounded-full text-black focus:outline-none",
+                                placeholder: "Updates in your inbox",
+                                "type":"text",
+                            }
+                            button {
+                                class: "px-6 py-2 rounded-full bg-orange-500 hover:bg-orange-800 focus:outline-none",
+                                "type":"submit",
+                                "Go"
+                            }
+                        }
+                    }
+
+                    // Copy
+                    div {
+                        class:"hidden text-white md:block",
+                        "Copyright © 2022, All rights reserved"
+                    }
+                }
             }
         }
     })
@@ -418,6 +599,8 @@ fn Main(cx: Scope) -> Element {
         Hero { }
         Features { }
         Testimonios { }
+        CallToAction { }
+        Footer { }
     })
 }
 
