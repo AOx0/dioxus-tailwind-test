@@ -345,10 +345,79 @@ fn App(cx: Scope) -> Element {
 }
 
 #[inline_props]
+fn Tarjeta<'a>(cx: Scope, nombre: &'a str, foto: &'a str, children: Element<'a>) -> Element {
+    cx.render(rsx! {
+        div {
+            class: "flex flex-col items-center p-6 space-y-6 rounded-lg bg-gray-100 dark:bg-gray-600 md:w-1/3",
+            img {
+                class: "w-16 -mt-14", 
+                src: "{foto}"
+            }
+            h5 {
+                class: "text-lg font-bold",
+                "{nombre}"
+            }
+            p {
+                class: "text-sm",
+                children
+            }
+        }
+    })
+}
+
+#[inline_props]
+fn Testimonios(cx: Scope) -> Element {
+    cx.render(rsx! {
+        section {
+            id: "testimonials",
+            class: "text-black dark:text-gray-100",
+
+            // Heading & Testimonials container
+            div {
+                class: "max-w-6xl px-5 mx-auto mt-32 text-center",
+
+                // Header
+                h2 {
+                    class: "text-4xl font-bold text-center",
+                    "What's different about Manage?"
+                }
+
+                // Testimonials
+                div {
+                    class: "flex flex-col mt-24 md:flex-row space-y-16 md:space-x-6 md:space-y-0 ",
+                    Tarjeta {
+                        nombre: "Anisha Li",
+                        foto: "../img/avatar-anisha.png",
+                        "\"Manage has supercharged our team’s workflow. The ability to \
+                        maintain visibility on larger milestones at all times keeps \
+                        everyone motivated.\""
+                    }
+                    Tarjeta {
+                        nombre: "Ali Bravo",
+                        foto: "../img/avatar-ali.png",
+                        "\"We have been able to cancel so many other subscriptions since \
+                        using Manage. There is no more cross-channel confusion and \
+                        everyone is much more focused.\""
+                    }
+                    Tarjeta {
+                        nombre: "Richard Watts",
+                        foto: "../img/avatar-richard.png",
+                        "\"Manage has supercharged our team’s workflow. The ability to \
+                        maintain visibility on larger milestones at all times keeps \
+                        everyone motivated.\""
+                    }
+                }
+            }
+        }
+    })
+}
+
+#[inline_props]
 fn Main(cx: Scope) -> Element {
     cx.render(rsx! {
         Hero { }
         Features { }
+        Testimonios { }
     })
 }
 
