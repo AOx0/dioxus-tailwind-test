@@ -192,7 +192,7 @@ fn Navbar(cx: Scope) -> Element {
                 class: "md:hidden",
                 menu {
                     id: "menu",
-                    class:"bg-white md:bg-gray-800 hidden absolute flex-col items-center self-end py-8 mt-10 \
+                    class:"bg-white dark:bg-gray-800 hidden absolute flex-col items-center self-end \
                     space-y-6 font-bold gb-white sm:w-auto sm:self-center left-6 right-6 \
                     drop-shadow-md",
                     MenuItem { href: "/price", "Pricing" }
